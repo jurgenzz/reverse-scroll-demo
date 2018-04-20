@@ -33,7 +33,6 @@ class App extends React.Component {
   };
 
   getHeight = ({index}) => {
-    console.log(this.customCache[index])
     return this.customCache[index] || 51;
   };
 
@@ -62,7 +61,6 @@ class App extends React.Component {
 
       if (diff && this.scrollDirection === "SCROLL_UP") {
         let newScrollTop = this.scrollTop + diff;
-        console.log({ current: this.scrollTop, diff, newScrollTop });
         this.scrollTop = newScrollTop;
         this.setState(
           {
