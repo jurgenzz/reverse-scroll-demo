@@ -6747,9 +6747,6 @@ var App = function (_React$Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (App.__proto__ || (0, _getPrototypeOf2.default)(App)).call(this, props));
 
-    _this.cache = new _reactVirtualized.CellMeasurerCache({
-      fixedWidth: true
-    });
     _this.customCache = {};
 
     _this.onRef = function (node) {
@@ -6759,7 +6756,6 @@ var App = function (_React$Component) {
     _this.getHeight = function (_ref) {
       var index = _ref.index;
 
-      console.log(_this.customCache[index]);
       return _this.customCache[index] || 51;
     };
 
@@ -6785,25 +6781,15 @@ var App = function (_React$Component) {
 
       // {({ measure }) => (
       return _react2.default.createElement(
-        _reactVirtualized.CellMeasurer,
-        {
-          cache: _this.cache,
-          key: index,
-          parent: parent,
-          rowIndex: index,
-          columnIndex: 0
-        },
-        _react2.default.createElement(
-          "div",
-          { key: index, style: (0, _extends3.default)({}, style, { borderBottom: "1px solid tomato" }) },
-          _react2.default.createElement(_ListElement2.default, {
-            index: index,
-            onLoad: function onLoad(height) {
-              return _this.handleMount(index, height, function () {});
-            },
-            count: data[index]
-          })
-        )
+        "div",
+        { key: index, style: (0, _extends3.default)({}, style, { borderBottom: "1px solid tomato" }) },
+        _react2.default.createElement(_ListElement2.default, {
+          index: index,
+          onLoad: function onLoad(height) {
+            return _this.handleMount(index, height, function () {});
+          },
+          count: data[index]
+        })
       )
       //  )}
       ;
@@ -6840,7 +6826,6 @@ var App = function (_React$Component) {
 
         if (diff && this.scrollDirection === "SCROLL_UP") {
           var newScrollTop = this.scrollTop + diff;
-          console.log({ current: this.scrollTop, diff: diff, newScrollTop: newScrollTop });
           this.scrollTop = newScrollTop;
           this.setState({
             scrollTop: newScrollTop
@@ -6878,7 +6863,6 @@ var App = function (_React$Component) {
           },
           rowCount: data.length,
           rowRenderer: this.rowRenderer,
-          deferredMeasurementCache: this.cache,
           onScroll: this.handleScroll,
           scrollTop: scrollTop,
           style: {

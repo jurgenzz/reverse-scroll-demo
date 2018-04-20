@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { List, CellMeasurer, CellMeasurerCache } from "react-virtualized";
+import { List } from "react-virtualized";
 
 import ListElement from "./ListElement";
 
@@ -14,9 +14,6 @@ class App extends React.Component {
       scrollTop: 0
     };
   }
-  cache = new CellMeasurerCache({
-    fixedWidth: true
-  });
 
   customCache = {};
 
@@ -32,7 +29,7 @@ class App extends React.Component {
     this.List = node;
   };
 
-  getHeight = ({index}) => {
+  getHeight = ({ index }) => {
     return this.customCache[index] || 51;
   };
 
@@ -81,21 +78,13 @@ class App extends React.Component {
   rowRenderer = ({ index, style, parent }) => {
     // {({ measure }) => (
     return (
-      <CellMeasurer
-        cache={this.cache}
-        key={index}
-        parent={parent}
-        rowIndex={index}
-        columnIndex={0}
-      >
-        <div key={index} style={{ ...style, borderBottom: "1px solid tomato" }}>
-          <ListElement
-            index={index}
-            onLoad={height => this.handleMount(index, height, () => {})}
-            count={data[index]}
-          />
-        </div>
-      </CellMeasurer>
+      <div key={index} style={{ ...style, borderBottom: "1px solid tomato" }}>
+        <ListElement
+          index={index}
+          onLoad={height => this.handleMount(index, height, () => {})}
+          count={data[index]}
+        />
+      </div>
       //  )}
     );
   };
@@ -111,7 +100,6 @@ class App extends React.Component {
           rowHeight={index => this.getHeight(index)}
           rowCount={data.length}
           rowRenderer={this.rowRenderer}
-          deferredMeasurementCache={this.cache}
           onScroll={this.handleScroll}
           scrollTop={scrollTop}
           style={{
